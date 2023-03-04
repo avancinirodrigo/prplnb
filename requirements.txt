@@ -1,1 +1,2 @@
 -r webapp/requirements.txt
+-r application/requirements.txt

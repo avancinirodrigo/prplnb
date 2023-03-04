@@ -31,3 +31,14 @@ export PYTHONPATH=~/prpln/prplnb
 export FLASK_DEBUG=1
 export FLASK_APP=~/prpln/prplnb/webapp/main.py
 ```
+
+## Postgres
+```
+sudo apt update
+sudo apt install postgresql-13-postgis-3
+sudo passwd postgres
+[[postgres]]
+su postgres
+psql -c "ALTER USER postgres WITH PASSWORD 'postgres'" -d postgres
+exit
+```
