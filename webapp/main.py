@@ -1,6 +1,6 @@
 import os
 import sys
-path = os.path.join(os.path.dirname(__file__), os.pardir)
+path = os.path.dirname(__file__)
 sys.path.append(path)
 from .api import create_app
 
