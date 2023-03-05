@@ -1,7 +1,7 @@
 from flask import jsonify, request
 from webapp.controllers.signup_controller import SignUpController
-from ..api import bp
-from ..api.database import db
+from . import bp
+from .database import db
 
 @bp.route('/users', methods=['POST'])
 def create_user():
