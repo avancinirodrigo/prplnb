@@ -1,15 +1,14 @@
 from abc import ABC, abstractmethod
 from application.entities.user import User
+from application.dataaccess.session import Session
 
-class UserRepo:
-    # def __init__(self, username: str, password: str):
-    #     pass
+class UserRepo(ABC):
 
     @abstractmethod
     def add(self, user: User):
-        pass
+        pass    
 
     @abstractmethod
-    def get(self, username: str) -> User:
+    def get(self, username: str, session: Session) -> User:
         pass      
     

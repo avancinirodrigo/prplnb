@@ -1,18 +1,13 @@
 from application.usecases.signup import SignUpData, SignUp
 from application.usecases.users_manager import UsersManager
 from application.thirdparties.sqlalchemy.sqlalchemy_database import SqlAlchemyDatabase
-from application.thirdparties.sqlalchemy.sqlalchemy_factory import SqlAchemyFactory
 from application.usecases.database_manager import DatabaseManager
 
 
 def test_signup():
     url = 'postgresql://postgres:postgres@localhost:5432/signup'
-    sqlalchemydb = SqlAlchemyDatabase()
-    dbfactory = SqlAchemyFactory()
-    dbman = DatabaseManager() #(sqlalchemydb, dbfactory)
-    dbman.set_database(sqlalchemydb)
-    dbman.set_dbfactory(dbfactory)
-    db = dbman.db()
+    DatabaseManager.instance().set_db(SqlAlchemyDatabase())
+    db = DatabaseManager.instance().db()
     db.connect(url)
     db.create_all(overwrite=True)
     user_data = SignUpData("avancinirodrigo@gmail.com", "avancini")

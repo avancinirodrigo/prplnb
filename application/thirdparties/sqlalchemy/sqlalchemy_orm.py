@@ -8,19 +8,18 @@ from application.dataaccess.session import Session
 from application.entities.user import User
 from .sqlalchemy_base import Base
 
+class UserRepoMetaclass(type(Base), type(UserRepo)):
+	pass
 
-class User(Base, UserRepo):
+class User(Base, UserRepo, metaclass=UserRepoMetaclass):
     __tablename__ = 'users'	
     id = Column(Integer, primary_key=True)
     username = Column(String, nullable=False, unique=True)
     password = Column(String, nullable=False)
 
-    # def __init__(self, user: UserEntity):
-	# 	# user = User(name, password)
-    #     self.username = username
-    #     self.password = password
-	# 	self.session
+    def add(self, user: User):
+        self.username = user.username
+        self.password = user.password
 
-	# def begin(self):
-    def get_user(self, username: str, session: Session) -> User:
+    def get(self, username: str, session: Session) -> User:
         return session.query(User).filter(User.username == username).one()

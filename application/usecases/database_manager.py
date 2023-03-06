@@ -1,20 +1,13 @@
 from application.dataaccess.database import Database
-from application.dataaccess.database_factory import DatabaseFactory
 from application.repository.user_repo import UserRepo
 
 
 class DatabaseManager:
     _instance = None
-    
-    # def __init__(self, database: Database, dbfactory: DatabaseFactory):
-    #     self._database = database
-    #     self._dbfactory = dbfactory
+    _database = None
 
-    def set_database(self, database: Database):
+    def set_db(self, database: Database):
         self._database = database
-
-    def set_dbfactory(self, dbfactory: DatabaseFactory):
-        self._dbfactory = dbfactory
 
     def db(self) -> Database:
         return self._database
