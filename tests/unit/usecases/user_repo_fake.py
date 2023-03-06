@@ -10,4 +10,4 @@ class UserRepoFake(UserRepo):
         users[user.username] = user
 
     def get(self, username: str, session: Session) -> User:
-        return users[username]
+        return users[username] if username in users else None

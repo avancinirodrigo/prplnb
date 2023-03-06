@@ -22,4 +22,4 @@ class User(Base, UserRepo, metaclass=UserRepoMetaclass):
         self.password = user.password
 
     def get(self, username: str, session: Session) -> User:
-        return session.query(User).filter(User.username == username).one()
+        return session.query(User).filter(User.username == username).first()
