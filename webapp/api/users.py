@@ -1,4 +1,4 @@
-from flask import jsonify, request
+from flask import request
 from webapp.controllers.signup_controller import SignUpController
 from . import bp
 from .database import db

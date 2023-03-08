@@ -8,5 +8,5 @@ def test_get_user_not_exists(use_db):
     uc = UsersManager()
     resp = uc.get_user(db, 'avancinirodrigo')
     assert resp.data is None
-    assert isinstance(resp.response, NotFound)
+    assert isinstance(resp.response_type, NotFound)
 

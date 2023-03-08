@@ -1,6 +1,6 @@
 from application.usecases.database_manager import DatabaseManager
+from application.usecases.response import Created
 from webapp.controllers.signup_controller import SignUpController
-from webapp.controllers.response import Created
 
 
 def test_signup(use_db):
@@ -8,4 +8,4 @@ def test_signup(use_db):
     userdata = {'username': 'avancinirodrigo@gmail.com', 'password': 'avancini'}
     ctrl = SignUpController(db, userdata)
     resp = ctrl.execute()
-    assert isinstance(resp, Created)
+    assert isinstance(resp.response_type, Created)

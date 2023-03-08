@@ -1,6 +1,6 @@
 from application.entities.user import User
 from application.dataaccess.database import Database
-from .response import UseCaseResponse, Success, NotFound
+from .response import UseCaseResponse, NotFound
 
 class UsersManager:
     def get_user(self, db: Database, username: str) -> UseCaseResponse:
@@ -8,6 +8,6 @@ class UsersManager:
         user = db.user_repo().get(username, session)
         session.close()
         if user is None:
-            return UseCaseResponse(None, NotFound())    
+            return UseCaseResponse(None, NotFound("User not found"))    
         return UseCaseResponse(user)
 
