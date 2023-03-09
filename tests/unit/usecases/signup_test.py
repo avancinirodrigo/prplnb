@@ -7,15 +7,14 @@ from .database_fake import DatabaseFake
 
 def test_signup():
     url = ''
-    DatabaseManager.instance().set_db(DatabaseFake())
-    db = DatabaseManager.instance().db()
+    db = DatabaseFake()
     db.connect(url)
     db.create_all(overwrite=True)
     user_data = SignUpData("avancinirodrigo@gmail.com", "avancini")
     uc = SignUp(user_data)
     uc.execute(db)
     usersman = UsersManager()
-    resp = usersman.get_user(db, user_data.username)
+    resp = usersman.get_user(db, user_data.to_dict())
     user = resp.data
     assert user.username == user_data.username 
     assert user.password == user_data.password

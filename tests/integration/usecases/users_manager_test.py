@@ -3,10 +3,10 @@ from application.usecases.database_manager import DatabaseManager
 from application.usecases.response import NotFound
 
 
-def test_get_user_not_exists(use_db):
-    db = DatabaseManager.instance().db()
+def test_get_user_not_exists(db):
     uc = UsersManager()
-    resp = uc.get_user(db, 'avancinirodrigo')
+    userdata = {"username": "avancinirodrigo", "password": "avancini"}
+    resp = uc.get_user(db, userdata)
     assert resp.data is None
     assert isinstance(resp.response_type, NotFound)
 

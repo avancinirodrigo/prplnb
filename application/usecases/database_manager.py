@@ -16,7 +16,7 @@ class DatabaseManager:
         return self._dbfactory.user_repo()
 
     @classmethod
-    def instance(cls):
+    def Instance(cls):
         if cls._instance is None:
             cls._instance = cls()
         return cls._instance

@@ -20,6 +20,9 @@ class Duplicated(Failure):
 class MissedInfo(Failure):
     pass
 
+class NotMatched(Failure):
+    pass
+
 class UseCaseResponse:
     def __init__(self, data, response_type: Response=Success()):
         self.data = data

@@ -1,11 +1,13 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
+from application.dataaccess.session import Session
+from application.repository.file_repo import FileRepo
 from sqlalchemy_utils import database_exists, create_database, drop_database
 from application.dataaccess.database import Database
 from application.repository.user_repo import UserRepo
 from .sqlalchemy_session import SqlAlchemySession
 from .sqlalchemy_base import Base
-from .sqlalchemy_orm import User
+from .sqlalchemy_orm import File, User
 
 
 class SqlAlchemyDatabase(Database):
@@ -14,8 +16,8 @@ class SqlAlchemyDatabase(Database):
 		self._session = scoped_session(sessionmaker(bind=self._engine))   
 		self._url = url   
 
-	def create_session(self):
-		return SqlAlchemySession(self._session)
+	def create_session(self) -> Session:
+		return SqlAlchemySession(self._session())
 
 	@property
 	def engine(self):
@@ -43,6 +45,7 @@ class SqlAlchemyDatabase(Database):
 		self.create_all_tables()	
 
 	def user_repo(self) -> UserRepo:
-		return User()		
+		return User()	
 
-
+	def file_repo(self) -> FileRepo:
+		return File()

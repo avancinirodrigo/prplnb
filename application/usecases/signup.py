@@ -14,6 +14,9 @@ class SignUpData:
         self.username = username
         self.password = password
 
+    def to_dict(self):
+        return {"username": self.username, "password": self.password}
+
 class SignUp:
     def __init__(self, signup_data: SignUpData):
         self._signup_data = signup_data
@@ -25,12 +28,13 @@ class SignUp:
         user = User(self._signup_data.username, self._signup_data.password)
         user_repo = db.user_repo()
         usersman = UsersManager()
-        out = usersman.get_user(db, self._signup_data.username)
+        out = usersman.get_user(db, self._signup_data.to_dict())
         if isinstance(out.response_type, Success):
             return UseCaseResponse(out.data, Duplicated("User already exists"))        
         user_repo.add(user)
         session = db.create_session()
         session.add(user_repo)
         session.commit()
+        session.close()
         return UseCaseResponse(user_repo, Created())
         
