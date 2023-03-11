@@ -1,6 +1,7 @@
-#from application.dataaccess.database_manager import DatabaseManager
+import os
+from application.fs.datastorefs import DatastoreFs
 from application.thirdparties.sqlalchemy.sqlalchemy_database import SqlAlchemyDatabase
 
 
 db = SqlAlchemyDatabase()
-#DatabaseManager = DatabaseManager(db)
+ds = DatastoreFs(os.environ.get('HOME'))

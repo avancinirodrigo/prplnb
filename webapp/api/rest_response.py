@@ -2,21 +2,32 @@ from flask import jsonify
 from flask.wrappers import Response
 from application.usecases.response import (
     UseCaseResponse,
+    Success,
     Created,
     MissedInfo,
-    Duplicated
+    Duplicated,
+    NotFound
 )
 
 class RestResponse:
     @staticmethod    
     def Json(response: UseCaseResponse) -> Response:
-        resp = None
+        if isinstance(response.response_type, Success):
+            return RestResponse.Ok()
         if isinstance(response.response_type, Created):
-            resp = RestResponse.Created()
+            return RestResponse.Created()
         elif isinstance(response.response_type, MissedInfo):
-            resp = RestResponse.BadRequest(response.response_type.message)
+            return RestResponse.BadRequest(response.response_type.message)
         elif isinstance(response.response_type, Duplicated):
-            resp = RestResponse.Conflict(response.response_type.message)
+            return RestResponse.Conflict(response.response_type.message)
+        elif isinstance(response.response_type, NotFound):
+            return RestResponse.NotFound(response.response_type.message)        
+        return RestResponse.NotImplemented(f'Response not implemented yet {response.__dict__}')
+
+    @staticmethod 
+    def Ok() -> Response:
+        resp = Response() 
+        resp.status_code = 200
         return resp
 
     @staticmethod 
@@ -26,13 +37,24 @@ class RestResponse:
         return resp
 
     @staticmethod 
-    def BadRequest(message: str) -> Response:
+    def Failure(message: str, status: int) -> Response:
         resp = jsonify({'message': message})
-        resp.status_code = 400
+        resp.status_code = status
         return resp
 
     @staticmethod 
+    def BadRequest(message: str) -> Response:
+        return RestResponse.Failure(message, 400)
+
+    @staticmethod 
     def Conflict(message: str) -> Response:
-        resp = jsonify({'message': message})
-        resp.status_code = 409
-        return resp        
+        return RestResponse.Failure(message, 409)
+
+    @staticmethod 
+    def NotImplemented(message: str) -> Response:
+        return RestResponse.Failure(message, 501)
+    
+    @staticmethod 
+    def NotFound(message: str) -> Response:
+        return RestResponse.Failure(message, 501)    
+      

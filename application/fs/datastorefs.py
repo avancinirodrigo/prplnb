@@ -7,11 +7,11 @@ from application.entities.file import File
 
 class DatastoreFs(Datastore):
 
-    def __init__(self):
-        self.path = f'{os.path.dirname(__file__)}/datastore'
+    def __init__(self, path: str):
+        self.root = f'{path}/datastore'
 
     def add_file(self, file_bytes: BytesIO, desired_url: str):
-        file_dest = f'{self.path}/{desired_url}'
+        file_dest = f'{self.root}/{desired_url}'
         dir_dest = os.path.dirname(file_dest)
         if not os.path.isdir(dir_dest):
             os.makedirs(dir_dest)
@@ -19,11 +19,11 @@ class DatastoreFs(Datastore):
             out.write(file_bytes.read())
 
     def delete(self):
-        if os.path.isdir(self.path):
-            shutil.rmtree(self.path)
+        if os.path.isdir(self.root):
+            shutil.rmtree(self.root)
 
     def load_file(self, url: str):
-        filepath = f'{self.path}/{url}'
+        filepath = f'{self.root}/{url}'
         return open(filepath, 'rb')
 
     def delete_file(self, filepath):

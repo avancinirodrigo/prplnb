@@ -1,7 +1,7 @@
+import os
 import pytest
-from application.usecases.database_manager import DatabaseManager
 from application.thirdparties.sqlalchemy.sqlalchemy_database import SqlAlchemyDatabase
-from tests.integration.usecases.datastorefs import DatastoreFs
+from application.fs.datastorefs import DatastoreFs
 
 
 @pytest.fixture(autouse=True)
@@ -15,6 +15,6 @@ def db():
 
 @pytest.fixture(autouse=True)
 def dsfs():
-    ds = DatastoreFs()
+    ds = DatastoreFs(os.path.dirname(__file__))
     yield ds
     ds.delete()

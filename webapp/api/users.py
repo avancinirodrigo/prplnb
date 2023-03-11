@@ -1,7 +1,7 @@
 from flask import request
 from webapp.controllers.signup_controller import SignUpController
 from . import bp
-from .database import db
+from .dataaccess import db
 from .rest_response import RestResponse
 
 @bp.route('/users', methods=['POST'])

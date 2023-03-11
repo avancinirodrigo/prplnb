@@ -1,6 +1,4 @@
-from application.entities.file import File
-from application.usecases.database_manager import DatabaseManager
-from application.usecases.response import Success
+from application.usecases.response import Success, NotFound
 from application.usecases.signup import SignUp, SignUpData
 from application.usecases.storage_manager import StorageManager
 from tests.tests_helper import TestsHelper
@@ -46,3 +44,29 @@ def test_add_file_revision_happy(db, dsfs):
     assert file_b11.read() == open(filepath1, 'rb').read()
     assert file_b11.read() != file_b00.read()
 
+def test_get_last_revision(db, dsfs):
+    signupData = SignUpData('avancinirodrigo', 'avancini')
+    signupUc = SignUp(signupData)
+    signupUc.execute(db)
+    dataDir = TestsHelper.GetDataDirPath()
+    
+    filepath0 = f'{dataDir}/restful-web-services.pdf'
+    file_b0 = open(filepath0, 'rb')
+    uc = StorageManager(db, dsfs)
+    uc.add_file(signupData.to_dict(), file_b0, '/docs/review/review.pdf')    
+
+    filepath1 = f'{dataDir}/Full-Stack-Engineer-Test.pdf'
+    file_b1 = open(filepath1, 'rb')
+    uc.add_file(signupData.to_dict(), file_b1, '/docs/review/review.pdf')
+    
+    out_get = uc.get_file(signupData.to_dict(), '/docs/review/review.pdf')
+    assert isinstance(out_get.response_type, Success)
+    assert open(filepath1, 'rb').read() == out_get.data.read()
+
+def test_get_file_not_found(db, dsfs):
+    signupData = SignUpData('avancinirodrigo', 'avancini')
+    signupUc = SignUp(signupData)
+    signupUc.execute(db)
+    uc = StorageManager(db, dsfs)    
+    out = uc.get_file(signupData.to_dict(), '/docs/review/review.pdf')
+    assert isinstance(out.response_type, NotFound)
