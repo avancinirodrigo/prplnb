@@ -79,12 +79,12 @@ Usually the server runs at:
 http://127.0.0.1:5000
 ```
 
-# PRPLNB
-This is the front end
+# PRPLNF
+This is the frontend
 
 ## Clone the project 
 ```bash
-git clone https://github.com/avancinirodrigo/prplnb.git
+git clone https://github.com/avancinirodrigo/prplnf.git
 ```
 
 ## Enter in the project dir
