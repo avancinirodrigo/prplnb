@@ -4,4 +4,4 @@ from application.thirdparties.sqlalchemy.sqlalchemy_database import SqlAlchemyDa
 
 
 db = SqlAlchemyDatabase()
-ds = DatastoreFs(os.environ.get('HOME'))
+ds = DatastoreFs(f'{os.environ.get("HOME")}/prpln')

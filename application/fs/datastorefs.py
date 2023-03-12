@@ -25,6 +25,10 @@ class DatastoreFs(Datastore):
     def load_file(self, url: str):
         filepath = f'{self.root}/{url}'
         return open(filepath, 'rb')
+        # file = open(filepath, 'rb')
+        # file_bytes = BytesIO(file)
+        # file.close()
+        # return file_bytes
 
     def delete_file(self, filepath):
         pass    

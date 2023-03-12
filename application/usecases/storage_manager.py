@@ -47,7 +47,7 @@ class StorageManager:
                 if revision == -1: # TODO: revision could have a date                   
                     revision = file.revision
                 file_bytes = self.ds.load_file(f'{user.username}/{revision}{file_url}')
-                return UseCaseResponse(file_bytes, Success())
+                return UseCaseResponse({'file_bytes': file_bytes, 'file': File(file_url, revision)}, Success())
             else:
                 return UseCaseResponse(None, NotFound("File not found"))
         return UseCaseResponse(None, NotFound("User not found"))

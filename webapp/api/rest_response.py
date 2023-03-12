@@ -1,4 +1,5 @@
-from flask import jsonify
+from typing import Union
+from flask import jsonify, send_file
 from flask.wrappers import Response
 from application.usecases.response import (
     UseCaseResponse,
@@ -23,6 +24,16 @@ class RestResponse:
         elif isinstance(response.response_type, NotFound):
             return RestResponse.NotFound(response.response_type.message)        
         return RestResponse.NotImplemented(f'Response not implemented yet {response.__dict__}')
+    
+    @staticmethod    
+    def SendFile(response: UseCaseResponse) -> Union[Response, None]:
+        if isinstance(response.response_type, Success):
+            file = response.data['file']
+            return send_file(response.data['file_bytes'],
+			                 download_name=file.name,
+                             as_attachment=True)
+        else:
+            return RestResponse.Json(response)
 
     @staticmethod 
     def Ok() -> Response:

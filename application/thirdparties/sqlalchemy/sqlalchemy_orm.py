@@ -1,7 +1,5 @@
 from sqlalchemy import Column, String, Integer, ForeignKey, and_
-from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
-from sqlalchemy.ext.hybrid import hybrid_property
 from application.repository.file_repo import FileRepo
 from application.repository.user_repo import UserRepo
 from application.entities.user import User as UserEntity
