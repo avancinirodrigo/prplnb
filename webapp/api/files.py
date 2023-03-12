@@ -8,6 +8,7 @@ from .rest_response import RestResponse
 @bp.route('/files/upload', methods=['POST'])
 @jwt_required()
 def add_file():
+    print(request.__dict__)
     form = request.form.to_dict() or {}
     files = request.files.to_dict() or {}
     userdata = get_jwt()
