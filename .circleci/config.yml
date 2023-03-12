@@ -35,7 +35,11 @@ jobs:
           # pip-dependency-file: test-requirements.txt  # if you have a different name for your requirements file, maybe one that combines your runtime and test requirements.
       - run:
           name: Install test dependencies
-          command: pip install -r tests/requirements.txt      
+          command: pip install -r tests/requirements.txt    
+      - run:
+          name: Define Environment Variable at Runtime
+          command: |
+            echo 'export PYTHONPATH=$PYTHONPATH:$(pwd)' >> "$BASH_ENV"       
       - run:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
