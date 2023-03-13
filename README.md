@@ -1,3 +1,6 @@
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/avancinirodrigo/prplnb/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/avancinirodrigo/prplnb/tree/master)
+[![codecov](https://codecov.io/gh/avancinirodrigo/prplnb/branch/master/graph/badge.svg?token=oSTpMo1cBI)](https://codecov.io/gh/avancinirodrigo/prplnb)
+
 # PRPLNB
 This is the backend 
 
