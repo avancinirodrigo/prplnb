@@ -47,8 +47,7 @@ jobs:
           # This assumes pytest is installed via the install-package step above
           command: pytest -v --cov --cov-report=xml  
       - codecov/upload:
-          file: 'coverage.xml'
-          token: ${{ secrets.CODECOV_TOKEN }}     
+          file: 'coverage.xml'    
       - run:
           name: Code style
           command: flake8 .  
