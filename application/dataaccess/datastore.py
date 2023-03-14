@@ -13,12 +13,12 @@ class Datastore(ABC):
 
     @abstractmethod
     def delete_file(self, filepath):
-        pass    
+        pass
 
     @abstractmethod
     def list_files(self, directory_name):
-        pass     
+        pass
 
     @abstractmethod
     def delete(self, directory_name):
-        pass  
+        pass

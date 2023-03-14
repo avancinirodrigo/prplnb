@@ -13,6 +13,7 @@ def db():
     yield db
     db.drop()
 
+
 @pytest.fixture(autouse=True)
 def dsfs():
     ds = DatastoreFs(os.path.dirname(__file__))

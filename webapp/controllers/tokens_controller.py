@@ -15,7 +15,7 @@ class TokensController:
                 or 'password' not in self.userdata):
             return MissedInfo("SigUp missed some key-value")
         username = self.userdata['username']
-        password = self.userdata['password']        
+        password = self.userdata['password']
         token_data = TokenData(username, password, self.token_creator)
         uc = CreateAccessToken(self.db, token_data)
         return uc.execute()

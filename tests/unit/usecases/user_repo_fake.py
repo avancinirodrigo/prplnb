@@ -4,8 +4,9 @@ from application.entities.user import User
 
 users = {}
 
+
 class UserRepoFake(UserRepo):
-    
+
     def add(self, user: User):
         users[user.username] = user
 
