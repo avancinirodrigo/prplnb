@@ -2,7 +2,6 @@ import os
 import shutil
 from io import BytesIO
 from application.dataaccess.datastore import Datastore
-from application.entities.file import File
 
 
 class DatastoreFs(Datastore):
@@ -25,13 +24,9 @@ class DatastoreFs(Datastore):
     def load_file(self, url: str):
         filepath = f'{self.root}/{url}'
         return open(filepath, 'rb')
-        # file = open(filepath, 'rb')
-        # file_bytes = BytesIO(file)
-        # file.close()
-        # return file_bytes
 
     def delete_file(self, filepath):
-        pass    
+        pass
 
     def list_files(self, directory_name):
-        pass               
+        pass

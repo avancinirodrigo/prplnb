@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, exc
+from sqlalchemy import exc
 from application.dataaccess.session import Session
 
 

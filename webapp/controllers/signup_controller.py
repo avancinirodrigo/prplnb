@@ -2,6 +2,7 @@ from application.dataaccess.database import Database
 from application.usecases.signup import SignUpData, SignUp
 from application.usecases.response import Response, MissedInfo
 
+
 class SignUpController:
     def __init__(self, db: Database, userdata: dict):
         self.db = db

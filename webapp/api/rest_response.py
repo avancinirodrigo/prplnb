@@ -10,6 +10,7 @@ from application.usecases.response import (
     NotFound
 )
 
+
 class RestResponse:
     @staticmethod
     def Json(response: UseCaseResponse) -> Response:
@@ -68,4 +69,3 @@ class RestResponse:
     @staticmethod
     def NotFound(message: str) -> Response:
         return RestResponse.Failure(message, 501)
-

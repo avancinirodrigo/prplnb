@@ -2,7 +2,6 @@ from sqlalchemy import Column, String, Integer, ForeignKey, and_
 from sqlalchemy.orm import relationship
 from application.repository.file_repo import FileRepo
 from application.repository.user_repo import UserRepo
-from application.entities.user import User as UserEntity
 from application.dataaccess.session import Session
 from application.entities.user import User
 from application.entities.file import File
@@ -12,8 +11,10 @@ from .sqlalchemy_base import Base
 class UserRepoMetaclass(type(Base), type(UserRepo)):
     pass
 
+
 class FileRepoMetaclass(type(Base), type(FileRepo)):
     pass
+
 
 class User(Base, UserRepo, metaclass=UserRepoMetaclass):
     __tablename__ = 'users'
@@ -28,6 +29,7 @@ class User(Base, UserRepo, metaclass=UserRepoMetaclass):
 
     def get(self, username: str, session: Session) -> User:
         return session.query(User).filter(User.username == username).first()
+
 
 class File(Base, FileRepo, metaclass=FileRepoMetaclass):
     __tablename__ = 'files'
