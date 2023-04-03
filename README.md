@@ -128,12 +128,12 @@ http://0.0.0.0:8000
 1. Data Store
 
 ## API Endpoints
-| Endpoint       | Method | Request                                                  | Response                     |
-| -------------- | ------ | -------------------------------------------------------- | ---------------------------- |
-| users          | POST   | {"username":"some username", "password":"some password"} | 201                          |
-| tokens         | POST   | {"username":"some username", "password":"some password"} | 200                          |
-| files/upload   | POST   | Form data {"a file", "desired_url:string"}               | 200                          |
-| files/download | POST   | Form data {"file_url:string", "revision:int"}            | a file according to revision |
+| Endpoint       | Method | Request                                                          | Response                     |
+| -------------- | ------ | ---------------------------------------------------------------- | ---------------------------- |
+| users          | POST   | {"username":"some username", "password":"some password"}         | 201                          |
+| tokens         | POST   | {"username":"some username", "password":"some password"}         | token, 200                   |
+| files/upload   | POST   | Form data {"a file", "desired_url:string"}, Auth Bearer Token    | 200                          |
+| files/download | POST   | Form data {"file_url:string", "revision:int"}, Auth Bearer Token | a file according to revision |
 
 
 # Cloud 

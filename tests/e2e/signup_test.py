@@ -1,4 +1,3 @@
-from application.usecases.database_manager import DatabaseManager
 from application.usecases.response import Created
 from webapp.controllers.signup_controller import SignUpController
 

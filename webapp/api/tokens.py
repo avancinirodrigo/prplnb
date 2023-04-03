@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from flask_jwt_extended import create_access_token
 from application.usecases.users_manager import UsersManager
-from application.usecases.response import UseCaseResponse, Success
+from application.usecases.response import Success
 from . import bp
 from .dataaccess import db
 from .rest_response import RestResponse
@@ -16,7 +16,7 @@ def create_token():
     if isinstance(out.response_type, Success):
         user = out.data
         print(user.__dict__)
-        access_token = create_access_token(identity=user.id, 
+        access_token = create_access_token(identity=user.id,
                                            additional_claims=userdata)
-        return jsonify({ "token": access_token, "user_id": user.id }), 200
+        return jsonify({"token": access_token, "user_id": user.id}), 200
     return RestResponse.Json(out)

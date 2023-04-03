@@ -8,9 +8,8 @@ class Session(ABC):
 
     @abstractmethod
     def commit(self):
-        pass        
+        pass
 
     @abstractmethod
     def close(self):
         pass
-
